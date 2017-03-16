@@ -1,0 +1,19 @@
+<!doctype html>
+<!--
+ This page is shown when the extension button is clicked, because the
+ "browser_action" field in manifest.json contains the "default_popup" key with
+ value "popup.html".
+ -->
+<html>
+  <head>
+    <title>EZ Selectorz</title>
+  </head>
+  <body>
+      <input id="selectorInput" type="text" placeholder="Type Selector Here" />
+      <div id="results">
+          <p>You selected <span class="resultNum"></span> elements!</p>
+      </div>
+      
+      <script src="../js/popup.js"></script>
+  </body>
+</html>

@@ -1,0 +1,24 @@
+{
+  "manifest_version": 2,
+
+  "name": "Zelector",
+  "description": "Shows what you're selecting of course!",
+  "version": "1.0",
+
+  "browser_action": {
+    "default_icon": "zelector.jpg",
+    "default_popup": "html/popup.html",
+    "default_title":"click me brotha!"
+  },
+  "permissions": [
+    "activeTab",
+    "https://ajax.googleapis.com/",
+    "tabs",
+    "http://*/*",
+    "https://*/*"
+ ],
+  "content_scripts": [{
+      "js":["js/select-them.js"],
+      "matches":["http://*/*","https://*/*"]
+      }]
+ }
