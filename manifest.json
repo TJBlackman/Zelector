@@ -18,7 +18,7 @@
     "https://*/*"
  ],
   "content_scripts": [{
-      "js":["js/select-them.js"],
+      "js":["js/window.js"],
       "matches":["http://*/*","https://*/*"]
-      }]
+    }]
  }
