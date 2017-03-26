@@ -5,18 +5,37 @@
  value "popup.html".
  -->
 <html>
-  <head>
-    <title>EZ Selectorz</title>
-    <style>
-        input {width: 150px; }
-    </style>
-  </head>
-  <body>
-      <input id="selectorInput" type="text" placeholder="Type Selector Here" />
-      <div id="results">
-          <p>You selected <span class="resultNum">0</span> elements!</p>
-      </div>
+    <head>
+        <title>EZ Selectorz</title>
+        <style>
+            input { width: 150px; }
+            .hidden { display: none !important; }
+            #poop button {
+                display: block;
+                width: 100%;
+                background-color: brown;
+                color: white;
+                font-size: 18px;
+                text-align: center;
+                outline: 0;
+                cursor: pointer;
+            }
+        </style>
+    </head>
+    <body>
 
-      <script src="../js/popup.js"></script>
-  </body>
+    <div id="selector">
+        <span>Select page elements:</span>
+        <input type="text" placeholder="Enter CSS Selector" />
+        <p>You selected <span class="resultNum">0</span> elements!</p>
+    </div>
+    <hr />
+    <div id="poop">
+        <button type="button">Make Poop</button>
+        <p class="hidden">You made <span class="numPoops">0</span> poops!</p>
+    </div>
+
+
+    <script src="../js/popup.js"></script>
+    </body>
 </html>
