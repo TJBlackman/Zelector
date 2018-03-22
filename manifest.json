@@ -7,8 +7,8 @@
 
   "browser_action": {
     "default_icon": "zelector-lg.png",
-    "default_popup": "html/popup.html",
-    "default_title":"click me brotha!"
+    "default_popup": "html/extension.html",
+    "default_title":"Zelector"
   },
   "permissions": [
     "activeTab",
@@ -18,7 +18,7 @@
     "https://*/*"
  ],
   "content_scripts": [{
-      "js":["js/window.js"],
+      "js":["/js/client.js"],
       "matches":["http://*/*","https://*/*"]
     }]
  }
