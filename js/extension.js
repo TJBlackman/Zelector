@@ -2,7 +2,8 @@
 // ==== CSS SELECTOR FUNCTION ====
 (function(){
     const input = document.querySelector('#css_selector input');
-    const result = document.querySelector('#css_selector .resultNum');
+    const results = document.querySelector('#css_selector .text-muted');
+    const resultsNumber = results.querySelector('.resultNum');
 
     const send_data_to_extension = (payload, callback) => {
         chrome.tabs.query({active: true, currentWindow: true}, (tabs) => {
@@ -15,10 +16,12 @@
             type: "SELECTOR",
             payload: input.value
         };
-        send_data_to_extension(action, () => {});
+        send_data_to_extension(action, (num) => { resultsNumber.innerText = isNaN(num) ? 0 : num }); 
     });
 
     const reactButton = document.getElementById('react_classnames');
-    reactButton.addEventListener('click', () => { send_data_to_extension({type:'CLASS_NAME'}); })
+    reactButton.addEventListener('click', () => { 
+        send_data_to_extension({type:'CLASS_NAME'}); 
+    });
 
 }());

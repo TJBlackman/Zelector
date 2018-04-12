@@ -40,20 +40,26 @@
   };
 
   // highlight selected elements on page
-  const get_css_selections = function(selector){
+  const get_css_selections = function(selector, sendResponse){
     remove_highlights(); 
     if (selector.toLowerCase() === 'make poop'){
-      make_poop()
+      make_poop();
+      sendResponse('This page is shitty....');
     } else {
-      const elements = Array.from(document.querySelectorAll(selector));
-      if (elements.length > 0){
-        const fragment = document.createDocumentFragment('div'); 
-        elements.map(el => {
-          const newEl = create_new_el(el); 
-          fragment.appendChild(newEl);
-        });
-        document.body.prepend(fragment);
+      try {
+
+        const elements = Array.from(document.querySelectorAll(selector));
+        if (elements.length > 0){
+          const fragment = document.createDocumentFragment('div'); 
+          elements.map(el => {
+            const newEl = create_new_el(el); 
+            fragment.appendChild(newEl);
+          });
+          document.body.prepend(fragment);
+          sendResponse(elements.length); 
+        }
       }
+      catch(err){ /*console.log(err);*/ }
     }
   }
 
@@ -67,14 +73,16 @@
   // return new highlight element
   const create_new_el = function(el){
     const {height, width, top, left} = el.getBoundingClientRect();
+    const offsetTop = window.pageYOffset; 
+    const offsetLeft = window.pageXOffset; 
     const styles = [
       'background-color: rgba(164,0,0,0.3);',
       'border: 1px solid rgba(164, 0, 0, 1);',
       'display: block;',
       'z-index: 999;',
       'position: absolute;',
-      `top: ${top}px;`,
-      `left: ${left}px;`,
+      `top: ${top + offsetTop}px;`,
+      `left: ${left + offsetLeft}px;`,
       `height: ${height}px;`,
       `width: ${width}px;`
     ].join('');
@@ -86,7 +94,7 @@
 
   chrome.runtime.onMessage.addListener(function({type, payload}, sender, sendResponse){
     switch (type){
-      case 'SELECTOR': get_css_selections(payload); break; 
+      case 'SELECTOR': get_css_selections(payload, sendResponse); break; 
       case 'CLASS_NAME': class_to_className(); break; 
       case 'PANDORA': break; 
       
@@ -95,5 +103,19 @@
   });
 
   document.body.addEventListener('click', remove_highlights);
+
+  // anonymous IIFE that auto clicks "I'm still listening" on Pandora
+  (function foreverPandora(){
+    if (window.location.host !== "www.pandora.com") { return; }
+    
+    const observer = new MutationObserver(() => {
+      let btn = document.querySelector('[data-qa="keep_listening_button"]');
+      if (btn) { btn.click(); }
+    });
+    const observer_target = document.querySelector('body'); 
+    const observer_options = { childList: true, subtree: true }
+    
+    observer.observe(observer_target, observer_options); 
+  }());
 
 }())
