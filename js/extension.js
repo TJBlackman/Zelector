@@ -16,12 +16,19 @@
             type: "SELECTOR",
             payload: input.value
         };
-        send_data_to_extension(action, (num) => { resultsNumber.innerText = isNaN(num) ? 0 : num }); 
+        send_data_to_extension(action, (num) => { 
+            resultsNumber.innerText = isNaN(num) ? 0 : num;
+        }); 
     });
 
     const reactButton = document.getElementById('react_classnames');
     reactButton.addEventListener('click', () => { 
         send_data_to_extension({type:'CLASS_NAME'}); 
+    });
+
+    const pass_btn = document.getElementById('show_pass');
+    pass_btn.addEventListener('click', () => { 
+        send_data_to_extension({type:'SHOW_PASSWORD'}); 
     });
 
 }());

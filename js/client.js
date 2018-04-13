@@ -92,11 +92,18 @@
     return newElement; 
   }
 
+  // SET PASSWORD FIELD TYPE TO TEXT
+  const show_password_fields = () => {
+    document.querySelectorAll('input[type="password"]').forEach(item => {
+      item.type="text";
+    });
+  }
+
   chrome.runtime.onMessage.addListener(function({type, payload}, sender, sendResponse){
     switch (type){
       case 'SELECTOR': get_css_selections(payload, sendResponse); break; 
       case 'CLASS_NAME': class_to_className(); break; 
-      case 'PANDORA': break; 
+      case 'SHOW_PASSWORD': show_password_fields(); 
       
       default: null; 
     }
