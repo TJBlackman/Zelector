@@ -1,4 +1,7 @@
 # Zelector
 A CSS Selector Extension
 
-You simply type in a CSS selector, and a highlighter box will appear on the screen, showing you where your selector is at! 
+- Highlights HTML elements as selected via CSS selectors
+- Changes Bootstrap docs to user className for quick React.js prototyping
+- Can show password fields as plain text fields
+- Automatically enables Forever Pandora (seems to skip ads on Pandora as well) :D
